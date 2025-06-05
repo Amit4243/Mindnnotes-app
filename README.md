@@ -1,3 +1,23 @@
+## Technologies Used
+- React Native (with Expo SDK)
+- expo-router
+- TypeScript
+- Tailwind CSS via Nativewind
+
+## Design Rationale
+The app is designed to help users journal their thoughts quickly and track moods. The UI is kept clean and minimal to reduce friction.
+
+## How to Run Locally
+1. Clone the repo
+2. Run `npm install`
+3. Start app: `npx expo start`
+
+## Usability Heuristics
+- Feedback: Toast after saving entry
+- Discoverability: Clear tabs and labels
+- Error prevention: Required fields validation
+
+
 # Mindnnotes-app
 I've generated a basic journaling app called MindNotes using React Native with Expo and expo-router. It includes:
 
