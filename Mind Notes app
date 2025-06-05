@@ -1,0 +1,107 @@
+// App Entry Point: app/_layout.tsx 
+import { Slot } from 'expo-router'; 
+import { Tabs } from 'expo-router'; 
+import { Ionicons } from '@expo/vector-icons';
+
+export default function Layout() { 
+   return ( 
+      <Tabs> 
+			  <Tabs.Screen 
+		      name="index" 
+				  options={{ 
+			    title: 'Home', 
+			    tabBarIcon: ({ color, size }) => ( 
+			      <Ionicons name="home" size={size} color={color} /> 
+				  ), 
+			 }} 
+		/> 
+	 <Tabs.Screen 
+	   name="entries" 
+		 options={{ 
+	     title: 'Entries', 
+			 tabBarIcon: ({ color, size }) => ( 
+		     <Ionicons name="book" size={size} color={color} /> 
+			 ), 
+		}} 
+	/>
+ </Tabs> ); 
+ }
+
+// Home Screen: app/index.tsx 
+import { View, Text, TextInput, Button, Alert } from 'react-native'; 
+import { useState } from 'react'; 
+import { router } from 'expo-router';
+
+export default function HomeScreen() { 
+  const [entry, setEntry] = useState(''); 
+	const [mood, setMood] = useState('😊');
+
+const saveEntry = () => { 
+  if (!entry.trim()) { 
+	    Alert.alert('Error', 'Please write something'); 
+		  return; 
+		} 
+	 // Here you would save to a local DB or state management 
+	Alert.alert('Saved!', 'Your journal entry was saved.'); 
+  setEntry(''); 
+	};
+
+return ( 
+   <View className="flex-1 p-4 bg-white"> 
+	   <Text className="text-xl font-bold mb-2">How are you feeling today?</Text> 
+		 <TextInput
+       placeholder="Write your thoughts..."
+       className="border p-2 h-32 text-base mb-2"
+       multiline
+       value={entry}
+       onChangeText={setEntry}
+     /> 
+     <Text className="mb-2">Mood: {mood}</Text> 
+     <View className="flex-row justify-between mb-2"> 
+      {['😊', '😐', '😢'].map((emoji) => ( 
+        <Text 
+          key={emoji} 
+          className={text-3xl ${mood === emoji ? 'opacity-100' : 'opacity-50'}} 
+          onPress={() => setMood(emoji)}> 
+          {emoji} 
+      </Text> 
+    ))} 
+  </View> 
+  <Button title="Save Entry" onPress={saveEntry} /> 
+ </View> 
+ ); 
+}
+
+// Entries Screen: app/entries.tsx 
+import { View, Text } from 'react-native';
+
+export default function EntriesScreen() { 
+  return ( 
+    <View className="flex-1 p-4 bg-white"> 
+    <Text className="text-xl font-bold mb-2">Past Entries</Text> 
+    <Text className="text-gray-500">(This is a placeholder. Add local DB or state to load entries.)</Text> 
+   </View> 
+); 
+}
+
+// tailwind.config.js 
+module.exports = { 
+   content: ['./app/*/.{js,ts,jsx,tsx}'], 
+  theme: { 
+    extend: {}, 
+  }, 
+  plugins: [], 
+};
+
+// package.json dependencies (required) 
+/* 
+  "dependencies": { 
+    "expo": "~50.0.0", 
+    "expo-router": "^3.0.0", 
+    "nativewind": "^2.0.11", 
+    "react": "18.2.0", 
+    "react-native": "0.73.0", 
+    "react-native-svg": "^13.9.0", 
+    "tailwindcss": "^3.3.0" 
+  } 
+*/
